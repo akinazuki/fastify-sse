@@ -1,11 +1,13 @@
 {
   "name": "fastify-sse",
   "version": "1.0.0",
+  "types": "index.d.ts",
   "description": "Provide Server-Sent Events to Fastify",
   "main": "index.js",
   "scripts": {
     "test": "tap test/*.js --coverage --100",
-    "test:coverage": "tap test/*.js --coverage --100 --coverage-report=html"
+    "test:coverage": "tap test/*.js --coverage --100 --coverage-report=html",
+    "build": "tsc -p tsconfig.json"
   },
   "bugs": {
     "url": "https://github.com/lolo32/fastify-sse/issues"
@@ -23,12 +25,14 @@
     "sse"
   ],
   "devDependencies": {
-    "fastify": "^2",
+    "@types/node": "^20.4.5",
     "request": "^2.81.0",
-    "tap": "^10.7.2"
+    "tap": "^10.7.2",
+    "typescript": "^5.1.6"
   },
   "dependencies": {
     "fast-safe-stringify": "^1.2.0",
-    "fastify-plugin": "^1"
+    "fastify": "^4.20.0",
+    "fastify-plugin": "^1.0.0"
   }
 }
