@@ -27,7 +27,6 @@ fastify.get("/sse", (request, reply) => {
 fastify.get("/sse2", (request, reply) => {
   const read = new PassThrough({ objectMode: true });
   let index = 0;
-
   reply.sse(read);
 
   const id = setInterval(() => {

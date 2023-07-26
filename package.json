@@ -1,9 +1,9 @@
 {
-  "name": "fastify-sse",
+  "name": "fastify-sse-ts",
   "version": "1.0.0",
   "types": "index.d.ts",
   "description": "Provide Server-Sent Events to Fastify",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "tap test/*.js --coverage --100",
     "test:coverage": "tap test/*.js --coverage --100 --coverage-report=html",
