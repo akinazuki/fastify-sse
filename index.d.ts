@@ -1,13 +1,9 @@
+import * as fastify from "fastify";
+
 declare module 'fastify' {
-    interface FastifyRequest {
+    export interface FastifyReply {
         sse: Function;
     }
-    interface FastifyReply {
-        sse: Function;
-    }
-}
-export interface FastifySSE {
-    sse: string;
 }
 declare const _default: fastify.Plugin<HttpServer, HttpRequest, HttpResponse, T>;
 export default _default;

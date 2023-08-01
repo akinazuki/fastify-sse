@@ -47,9 +47,9 @@ fastify.route({
 fastify.get("/", (request, reply) => {
     reply.send({ hello: "world" });
 });
-fastify.listen({ port: 3000 }, (err) => {
+fastify.listen({ port: 23000 }, (err) => {
     if (err) {
         throw err;
     }
-    console.log(`server listening on 3000`);
+    console.log(`server listening on 23000`);
 });

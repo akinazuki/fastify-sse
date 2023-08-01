@@ -1,21 +1,15 @@
 /*
  * Based on https://github.com/mtharrison/susie
  */
-import fastifyPlugin, { PluginOptions } from "fastify-plugin";
+import fp from "fastify-plugin";
 import Stream, { PassThrough } from "stream";
 import safeStringify from "fast-safe-stringify";
-import { FastifyInstance, FastifyPluginAsync } from 'fastify'
+import { FastifyInstance, FastifyPluginOptions } from 'fastify'
 
 declare module 'fastify' {
-  interface FastifyRequest {
-    sse: Function
-  }
   interface FastifyReply {
-    sse: Function
+    sse: Function;
   }
-}
-export interface FastifySSE {
-  sse: string
 }
 
 const Readable = Stream.Readable;
@@ -108,7 +102,7 @@ class EventTransform extends Transform {
   idGenerator: any;
   event: any;
   eventGenerator: any;
-  constructor(options: fastifyPlugin.PluginOptions, objectMode: boolean) {
+  constructor(options: {}, objectMode: boolean) {
     super({ objectMode });
 
     options = options || {};
@@ -168,7 +162,7 @@ class EventTransform extends Transform {
  */
 
 
-const sse: FastifyPluginAsync<FastifySSE> = async (fastify: FastifyInstance, opts: object) => {
+const sse = async (fastify: FastifyInstance, options: FastifyPluginOptions) => {
   fastify.decorateReply("sse",
     /**
      * Function called when new data should be send
@@ -178,7 +172,7 @@ const sse: FastifyPluginAsync<FastifySSE> = async (fastify: FastifyInstance, opt
      * @param {function|null} [options.idGenerator] Generate the event id
      * @param {string|function} [options.event] Generate the event name
      */
-    function (chunk: string | ReadableStream | Object, options: PluginOptions) {
+    function (chunk: string | ReadableStream | Object, options: any = {}) {
       let streamTransform;
       const that = this as any;
       const send = (stream: ReadableStream) => {
@@ -242,4 +236,4 @@ const sse: FastifyPluginAsync<FastifySSE> = async (fastify: FastifyInstance, opt
       writeEvent(event, streamTransform);
     });
 };
-export default fastifyPlugin(sse);
+export default fp(sse);

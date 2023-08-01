@@ -167,7 +167,7 @@ class EventTransform extends Transform {
  * @param {Object} opts
  * @param {function} next
  */
-const sse = (fastify, opts) => __awaiter(void 0, void 0, void 0, function* () {
+const sse = (fastify, options) => __awaiter(void 0, void 0, void 0, function* () {
     fastify.decorateReply("sse", 
     /**
      * Function called when new data should be send
@@ -177,7 +177,7 @@ const sse = (fastify, opts) => __awaiter(void 0, void 0, void 0, function* () {
      * @param {function|null} [options.idGenerator] Generate the event id
      * @param {string|function} [options.event] Generate the event name
      */
-    function (chunk, options) {
+    function (chunk, options = {}) {
         let streamTransform;
         const that = this;
         const send = (stream) => {
